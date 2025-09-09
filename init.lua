@@ -298,6 +298,23 @@ require('lazy').setup({
   -- Then, because we use the `opts` key (recommended), the configuration runs
   -- after the plugin has been loaded as `require(MODULE).setup(opts)`.
 
+  {
+    'nvim-neo-tree/neo-tree.nvim',
+    branch = 'v3.x',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'MunifTanjim/nui.nvim',
+      'nvim-tree/nvim-web-devicons', -- optional, but recommended
+    },
+    lazy = false, -- neo-tree will lazily load itself
+    config = function()
+      require('neo-tree').setup {}
+
+      vim.keymap.set('n', '<leader>j', '<cmd>Neotree reveal left<CR>', { desc = 'Reveal neotree on the left', silent = true })
+      vim.keymap.set('n', '<leader>p', '<cmd>Neotree close<CR>', { desc = 'Closes neotree if open', silent = true })
+    end,
+  },
+
   { -- Useful plugin to show you pending keybinds.
     'folke/which-key.nvim',
     event = 'VimEnter', -- Sets the loading event to 'VimEnter'
@@ -698,6 +715,12 @@ require('lazy').setup({
             },
           },
         },
+        clangd = {},
+        ts_ls = {},
+        pylsp = {},
+        tailwindcss = {},
+        html = {},
+        laravel_ls = {},
       }
 
       -- Ensure the servers and tools above are installed
